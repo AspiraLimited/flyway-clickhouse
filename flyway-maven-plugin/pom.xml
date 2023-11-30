@@ -21,6 +21,7 @@
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-parent</artifactId>
         <version>8.5.13</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>flyway-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
