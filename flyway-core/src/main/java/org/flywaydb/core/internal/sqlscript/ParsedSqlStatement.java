@@ -79,19 +79,9 @@ public class ParsedSqlStatement implements SqlStatement {
         return canExecuteInTransaction;
     }
 
-
-
-
-
-
-
-
     @Override
-    public Results execute(JdbcTemplate jdbcTemplate
-
-
-
-                          ) {
-        return jdbcTemplate.executeStatement(sql);
+    public Results execute(JdbcTemplate jdbcTemplate) {
+        return jdbcTemplate.executeStatement(sql.replace("--", "-- "));
     }
+
 }

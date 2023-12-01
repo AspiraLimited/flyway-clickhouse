@@ -202,38 +202,16 @@ public class DefaultSqlScriptExecutor implements SqlScriptExecutor {
         logStatementExecution(sqlStatement);
         String sql = sqlStatement.getSql() + sqlStatement.getDelimiter();
 
-
-
-
-
-
-        Results results = sqlStatement.execute(jdbcTemplate
-
-
-
-                                              );
+        Results results = sqlStatement.execute(jdbcTemplate);
         if (results.getException() != null) {
-
-
-
-
-
             printWarnings(results);
             handleException(results, sqlScript, sqlStatement);
             return;
         }
 
-
-
-
-
-
         printWarnings(results);
-        handleResults(results
+        handleResults(results);
 
-
-
-                     );
     }
 
     protected void handleResults(Results results
