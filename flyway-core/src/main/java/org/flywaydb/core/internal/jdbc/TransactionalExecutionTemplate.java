@@ -50,11 +50,15 @@ public class TransactionalExecutionTemplate implements ExecutionTemplate {
     public <T> T execute(Callable<T> callback) {
         boolean oldAutocommit = true;
         try {
-            oldAutocommit = connection.getAutoCommit();
-            connection.setAutoCommit(false);
-            T result = callback.call();
-            connection.commit();
-            return result;
+            if (connection.getTransactionIsolation() != Connection.TRANSACTION_NONE) {
+                oldAutocommit = connection.getAutoCommit();
+                connection.setAutoCommit(false);
+                T result = callback.call();
+                connection.commit();
+                return result;
+            } else {
+                return callback.call();
+            }
         } catch (Exception e) {
             RuntimeException rethrow;
             if (e instanceof SQLException) {
